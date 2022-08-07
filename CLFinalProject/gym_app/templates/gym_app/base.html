@@ -1,0 +1,23 @@
+{% load static %}
+<!doctype html>
+<html>
+{% block head %}
+<head>
+    <meta charset="utf-8">
+</head>
+{% endblock %}
+{% block title %}
+<title></title>
+{% endblock %}
+<body>
+<a href="/"><img src="{% static 'gym_app/vvlogoaltblack.png' %}"></a>
+{% block content %}
+{% endblock %}
+</body>
+<footer>
+    <br>
+    <b>Today is {{ context_now }} | Version {{ context_version }}</b>
+    <b>{{context_weather}}</b>
+    <br>
+</footer>
+</html>
