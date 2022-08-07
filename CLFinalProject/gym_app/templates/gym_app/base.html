@@ -4,20 +4,24 @@
 {% block head %}
 <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'gym_app/styles.css' %}" type="text/css">
 </head>
 {% endblock %}
 {% block title %}
 <title></title>
 {% endblock %}
 <body>
-<a href="/"><img src="{% static 'gym_app/vvlogoaltblack.png' %}"></a>
+
+<a href="/gym_app/static"><img src="{% static 'gym_app/logo-Placeholder.png' %}"></a>
 {% block content %}
 {% endblock %}
+
 </body>
 <footer>
     <br>
-    <b>Today is {{ context_now }} | Version {{ context_version }}</b>
-    <b>{{context_weather}}</b>
+    <br>The current time is {{ context_now }} | Website Version {{ context_version }}</br>
+    <br>{{context_weather}}</br>
+    <br>Hello {{context_user}}</br>
     <br>
 </footer>
 </html>

@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'gym_app/base.html' %}
+{% block content %}
+<p>Edit your personal details here {{ first_name }}. </p>
+<p>Membership Number | {{ member_number }} </p>
+<hr>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="button-55" value="Save Details">
+</form>
+{% if successful %}
+<br>
+<hr>
+<div class="success-message">
+    Details updated successfully!
+</div>
+{% endif %}
+
+
+    {% endblock %}

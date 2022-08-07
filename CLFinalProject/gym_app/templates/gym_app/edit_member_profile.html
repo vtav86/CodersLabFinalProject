@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'gym_app/base.html' %}
+{% block content %}
+<p>Edit member details  </p>
+<p>Membership Number | {{ user.member_number }} </p>
+<p><a href="/change-membership-number/">Change membership number here</a></p>
+<hr>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="button-55" value="Save Details">
+</form>
+{% if updated %}
+<br>
+<hr>
+<div class="success-message">
+    Details updated successfully!
+</div>
+{% endif %}
+
+
+    {% endblock %}

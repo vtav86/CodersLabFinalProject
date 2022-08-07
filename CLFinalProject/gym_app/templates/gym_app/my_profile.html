@@ -1,10 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'gym_app/base.html' %}
+{% block content %}
+{% if not already_logged_in %}
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="button-55" value="Login">
+    {% else %}
+    <p>Member Number {{ member_number }}</p>
+    <p> {{ member_details.first_name }} </p>
+    <p> {{ member_details.last_name }} </p>
+    <p> {{ member_details.email }} </p>
+    <p> {{ member_details.phone_number }} </p>
+    <p> {{ member_details.building_number }} </p>
+    <p> {{ member_details.apartment_number }} </p>
+    <p> {{ member_details.street }} </p>
+    <p> {{ member_details.city }} </p>
+    <p> {{ member_details.emergency_contact_name }} </p>
+    <p> {{ member_details.emergency_contact_number }} </p>
+    {% endif %}
+    <p><a href="/edit-profile/">Edit your profile</a></p>
+    <p><a href="/change-password/">Change your password</a></p>
+</form>
+
+{% endblock %}

@@ -1,10 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'gym_app/base.html' %}
+{% block content %}
+
+<form action="" method="POST">
+    {% if not manual_input %}
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p><input type="submit" class="button-55" value="Login" name="login"></p>
+     {% if visit_logged %}
+    <div>
+        <h2 class="success-message">Member {{member_details.member.first_name}} visit has been logged</h2>
+    </div>
+      {% endif %}
+    <br>
+
+    <p><input type="submit" class="button-55" value="Manually Input Member Number" name="manual_selection"></p>
+    {% endif %}
+    {% if manual_input %}
+    <br>
+    {% csrf_token %}
+    <p><input type="number" name="entered_member_number" placeholder="Enter Member Number"></p>
+    <p><input type="submit" class="button-55" value="Log Visit" name="log_visit"></p>
+    {% endif %}
+    {% if membership_expired %}
+    <div>
+        <h2 class="error-message">Membership for member {{ member_details.member_number }} expired on {{ member_details.expiry }}</h2>
+        <p><a href="/member-payment/{{member_details.member_id}}/">Click here to renew membership</a></p>
+    </div>
+    {% endif %}
+    {% if member_not_found %}
+    <div>
+        <h2 class="error-message">Membership not found</h2>
+    </div>
+      {% endif %}
+</form>
+
+
+{% endblock %}

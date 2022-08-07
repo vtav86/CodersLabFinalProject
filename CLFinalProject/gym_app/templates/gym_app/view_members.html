@@ -1,10 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'gym_app/base.html' %}
+{% block content %}
+<p>All members listed below </p>
+
+<hr>
+
+
+<table>
+    <tr>
+        <th>Member Number</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+        <th>Membership Expiry</th>
+        <th>Edit Profile</th>
+        <th>Make Payment</th>
+    </tr>
+    {% for member in all_member_numbers %}
+    <tr>
+          <th>{{member.member_number}}</th>
+        <th>{{member.member.first_name}}</th>
+        <th>{{member.member.last_name}}</th>
+        <th>{{member.member.phone_number}}</th>
+        <th>{{member.member.email}}</th>
+        {% if member.expiry > date %}
+        <th style="color:green"> {{member.expiry|date:" d M Y" }}</th>
+        {% else %}
+        <th style="color:red"> {{member.expiry|date:" d M Y" }}</th>
+        {% endif %}
+        <th><a href="/member-profile/{{member.member_id}}">Edit</a></th>
+            <th><a href="/member-payment/{{member.member_id}}">Payment</a></th>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}

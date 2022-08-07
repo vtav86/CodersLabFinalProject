@@ -1,10 +1,21 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Logout User</title>
 </head>
 <body>
-$END$
+{% if auth %}
+<H5>User {{user}} currently logged in</H5>
+<form action="" method="POST">
+    {% csrf_token %}
+    <button type="submit">Logout {{user}}</button>
+</form>
+{% else %}
+<h3>No users logged in</h3>
+{% endif %}
+
 </body>
 </html>
+

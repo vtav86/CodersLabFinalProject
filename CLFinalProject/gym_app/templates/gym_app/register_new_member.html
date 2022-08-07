@@ -1,10 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'gym_app/base.html' %}
+{% block content %}
+{{ form.non_field_errors }}
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <input type="submit" value="Register">
+
+    {% if existing_members %}
+    <b style="color:red"><h4>WARNING!</h4>
+        Existing member(s) with same name and date of birth found!
+        {% for each_existing_member in existing_members %}
+        <ul>
+            See member profile for <a href="/member-profile/{{each_existing_member.id}}/">
+            {{each_existing_member.first_name}}
+            {{each_existing_member.last_name}}</a>
+            Phone Number - {{ each_existing_member.phone_number }}
+            Street - {{ each_existing_member.street_name }}
+        </ul>
+        {% endfor %}
+        If you would still like to register these details click register anyway.
+
+        <input type="submit" name="bypass" value="Register Anyway"></p>
+
+
+    </b>
+    {% endif %}
+
+</form>
+<br>
+
+
+{% endblock %}
+

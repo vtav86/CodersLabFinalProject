@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'gym_app/base.html' %}
+{% block content %}
+{% if not already_logged_in %}
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="button-55" value="Login">
+</form>
+{% endif %}
+{% if form_error %}
+<b>
+    <b style="color:red">{{ form_error }}
+    </b>
+    {% endif %}
+    <b>{{ already_logged_in }}</b>
+
+    {% endblock %}

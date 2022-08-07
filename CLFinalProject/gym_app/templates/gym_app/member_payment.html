@@ -1,10 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'gym_app/base.html' %}
+{% block content %}
+<p><H4>Payment History</H4></p>
+<p>{{member_details.member_number}}</p>
+<p>{{ member_details.member.first_name}} {{ member_details.member.last_name}}</p>
+<p>Current membership expiry date | {{member_details.expiry}}</p>
+<table>
+    <tr>
+        <th>Payment Date</th>
+        <th>Payment Type</th>
+        <th>Subscription Period</th>
+        <th>Payment Amount</th>
+
+    </tr>
+    {% for payment in payments %}
+    <tr>
+        <th>{{payment.payment_date}}</th>
+        <th>{{payment.payment_type}}</th>
+        <th>{{payment.subscription_period}}</th>
+        <th>{{payment.payment_amount}}</th>
+    <tr>
+        {% empty %}
+        <th>No payment history available</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+
+
+    {% endfor %}
+
+</table>
+
+
+<form action="" method="POST">
+{% csrf_token %}
+    <p>Select payment type <select name="payment_type">
+        {% for type in payment_type %}
+
+        <option value="{{ type.0 }}">{{type.1}}</option>
+
+        {% endfor %}</select></p>
+    <p>Select subscription period <select name="subscription">
+        {% for sub in subscription %}
+
+        <option value="{{ sub.0 }}">{{sub.1}}</option>
+
+        {% endfor %}</select></p>
+    <p>Enter amount paid <input required type="number" name="payment_amount" min="0"></p>
+    <input type="submit" class="button-55" name="payment_confirmation" value="Confirm Payment">
+
+
+    {% if new_expiry_date %}
+    <hr>
+    <br>
+    <p>Payment for {{member}} {{member.last_name}} has been confirmed!</p>
+    <p>New expiry date is {{ new_expiry_date.expiry }}</p>
+    {% endif %}
+
+</form>
+
+{% endblock %}
+

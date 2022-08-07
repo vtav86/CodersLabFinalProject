@@ -1,10 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'gym_app/base.html' %}
+{% block content %}
+<p>Change Membership Number </p>
+<p>Select Member</p>
+
+<hr>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="button-55" name="select" value="Select">
+    {% if selected %}
+    <br>
+    <hr>
+    <p>Enter new membership number
+        <input type="number" name="new_number"></p>
+    <input type="submit" class="button-55" name="confirm_number" value="Confirm New Number">
+
+    {% endif %}
+
+    {% if number_in_use %}
+    <br>
+    <hr>
+    <div class="error-message">
+        Membership number in use! Select another....
+        <p>Enter new membership number
+            <input type="number" name="new_number"></p>
+        <input type="submit" class="button-55" name="confirm_number" value="Confirm New Number">
+    </div>
+    {% endif %}
+</form>
+
+{% if confirmed %}
+<br>
+<hr>
+<div class="success-message">
+    Membership number updated successfully!
+</div>
+{% endif %}
+
+{% endblock %}
