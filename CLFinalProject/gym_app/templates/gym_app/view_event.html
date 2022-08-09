@@ -1,0 +1,64 @@
+{% extends 'gym_app/base.html' %}
+{% block content %}
+<div class="all-text">
+    <title>Register For Event</title>
+    <h4>Register For Event</h4>
+</div>
+<br>
+<p>Event Date</p>
+<br>
+<p>{{event.date}}</p>
+<br>
+<hr>
+<p>Event Name</p>
+<br>
+<p>{{event.event_name}}</p>
+<br>
+<hr>
+<p>Event Description</p>
+<br>
+<p>{{event.event_description}}</p>
+<br>
+<hr>
+<p>Maximum Attendees</p>
+<br>
+<p>{{event.maximum_people}}</p>
+<br>
+<hr>
+{% if number_registered < event.maximum_people %}
+<form method="POST" action="">
+    {% csrf_token %}
+    {% if not registered and not nowregistered %}
+    <input type="submit" value="Register" class="button-55">
+    {% endif %}
+
+
+</form>
+<br>
+{% else %}
+<p>Sorry, event is full</p>
+{% endif %}
+
+{% if registered and not nowregistered %}
+<p>You are already registered to attend this event</p>
+
+<form method="POST" action="">
+    {% csrf_token %}
+    <input type="submit" name="cancel" value="Cancel" class="button-55">
+</form>
+  
+{% endif %}
+<br>
+{% if nowregistered and not registered %}
+<p>You are now registered to attend the event</p>
+<form method="POST" action="">
+    {% csrf_token %}
+    <input type="submit" name="cancel" value="Cancel" class="button-55">
+</form>
+{% endif %}
+{% if cancel %}
+<br>
+
+<p>Your attendance has been cancelled</p>
+{% endif %}
+{% endblock %}

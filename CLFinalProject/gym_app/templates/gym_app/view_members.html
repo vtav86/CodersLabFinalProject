@@ -1,35 +1,41 @@
 {% extends 'gym_app/base.html' %}
 {% block content %}
+<title>View Members </title>
+<div style="text-align:left">
+<h4>View All Members</h4>
+<br>
 <p>All members listed below </p>
-
+</div>
 <hr>
 
 
-<table>
+<table class="table table-bordered table-hover">
+    <thead class="thead-format">
     <tr>
-        <th>Member Number</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Phone Number</th>
-        <th>Email</th>
-        <th>Membership Expiry</th>
-        <th>Edit Profile</th>
-        <th>Make Payment</th>
+        <td>Member Number</td>
+        <td>First Name</td>
+        <td>Last Name</td>
+        <td>Phone Number</td>
+        <td>Email</td>
+        <td>Membership Expiry</td>
+        <td>Edit Profile</td>
+        <td>Make Payment</td>
     </tr>
+    </thead>
     {% for member in all_member_numbers %}
-    <tr>
-          <th>{{member.member_number}}</th>
-        <th>{{member.member.first_name}}</th>
-        <th>{{member.member.last_name}}</th>
-        <th>{{member.member.phone_number}}</th>
-        <th>{{member.member.email}}</th>
+    <tr class="table-font">
+          <td>{{member.member_number}}</td>
+        <td>{{member.member.first_name}}</td>
+        <td>{{member.member.last_name}}</td>
+        <td>{{member.member.phone_number}}</td>
+        <td>{{member.member.email}}</td>
         {% if member.expiry > date %}
-        <th style="color:green"> {{member.expiry|date:" d M Y" }}</th>
+        <td style="color:green"> {{member.expiry|date:" d M Y" }}</td>
         {% else %}
-        <th style="color:red"> {{member.expiry|date:" d M Y" }}</th>
+        <td style="color:red"> {{member.expiry|date:" d M Y" }}</td>
         {% endif %}
-        <th><a href="/member-profile/{{member.member_id}}">Edit</a></th>
-            <th><a href="/member-payment/{{member.member_id}}">Payment</a></th>
+        <td><a href="/edit-member-profile/{{member.member_id}}">Edit</a></td>
+            <td><a href="/member-payment/{{member.member_id}}">Payment</a></td>
     </tr>
     {% endfor %}
 </table>

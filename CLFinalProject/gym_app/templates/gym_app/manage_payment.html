@@ -1,18 +1,19 @@
 {% extends 'gym_app/base.html' %}
 {% block content %}
-
+<title>Manage Payments </title>
+<h4>Manage Payments </h4>
+<br>
 <form action="" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
     {% if not confirmation %}
     <input type="submit" class="button-55" name="next" value="Proceed to confirmation">
     {% endif %}
-    <br>
-    <br>
+
     {% if confirmation %}
 
     {% for payment in payment_history %}
-    <li>Paid: {{ payment.payment_date }}</li>
+    <li>Last Paid: {{ payment.payment_date }}</li>
     {% endfor %}
     <br>
     Current Expiry Date:

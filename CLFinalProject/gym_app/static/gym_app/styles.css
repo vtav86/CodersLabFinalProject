@@ -53,3 +53,19 @@
     font-weight: bold;
 }
 
+
+.table-font {
+    color: darkslategrey;
+}
+
+.thead-format {
+    color: white;
+    background-color: black;
+}
+
+.all-text {
+    text-align: left;
+}
+.background-homepage {
+    background-image: url("https://images.pexels.com/photos/6690061/pexels-photo-6690061.jpeg?auto=compress&cs=tinysrgb&w=1600")
+}

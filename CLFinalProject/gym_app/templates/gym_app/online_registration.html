@@ -1,6 +1,8 @@
 {% extends 'gym_app/base.html' %}
 {% block content %}
-
+<title>Online Registration</title>
+<h4>Online Registration</h4>
+<br>
 
 {% if not already_logged_in %}
 
@@ -12,14 +14,30 @@
 
 </form>
 {% endif %}
-
+<br>
+<br>
 {% if already_registered %}
 <br>
 <p>{{ already_registered}}</p>
 <p><a href="/login">Proceed to login page</a></p>
 {% endif %}
 
+{% if mismatch %}
+<br>
+<p>Member number and last name did not match</p>
 
-<b>{{ already_logged_in }}</b>
+{% endif %}
+{% if registered %}
+<br>
+<p>You are now registered for online access. </p>
+<p><a href="/login">Proceed to login page</a></p>
 
+{% endif %}
+
+
+<br>
+{% if already_logged_in %}
+<p>You have already registered for online access and are now logged in!</p>
+<p><a href="/logout/">Logout </a>in order to register someone else for online access</p>
+{% endif %}
 {% endblock %}

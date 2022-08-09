@@ -1,0 +1,37 @@
+{% extends 'gym_app/base.html' %}
+{% block content %}
+<title>All Events </title>
+<h4>View All Events </h4>
+<br>
+<p>All events listed below </p>
+
+<hr>
+<div class="mw-100">
+    <table class="table table-bordered table-hover">
+        <thead class="thead-format">
+        <tr>
+            <td>Event Date</td>
+            <td>Event Name</td>
+            <td>Maximum Attendees</td>
+            <td>Currently Registered</td>
+            <td>View/Edit/Delete Event</td>
+        </tr>
+        </thead>
+        {% for event in events %}
+        <tr class="table-font">
+            <td>{{event.date}}</td>
+            <td>{{event.event_name}}</td>
+            <td>{{event.maximum_people}}</td>
+            <td>
+                {% for key,value in registered %}
+                {% if key == event.id %}
+                {{ value }}
+                {% endif %}
+                {% endfor %}
+            </td>
+            <td><a href="/view-event-info/{{event.id}}/">View/Edit</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

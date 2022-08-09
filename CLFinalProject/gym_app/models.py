@@ -20,7 +20,7 @@ class Members(models.Model):
         verbose_name_plural = 'Members'
 
     def __str__(self):
-        return self.last_name, self.first_name
+        return f'{self.last_name} {self.first_name}'
 
 
 class MemberNumber(models.Model):
@@ -40,18 +40,23 @@ class Payments(models.Model):
     subscription_period = models.CharField(max_length=20, null=False)
     payment_amount = models.IntegerField(null=False)
 
+    class Meta:
+        verbose_name_plural = 'Payments'
+
+    def __str__(self):
+        return f'{self.member.first_name} {self.member.last_name} | {self.payment_date} '
 
 class Visits(models.Model):
     date = models.DateField(auto_now_add=True)
     time = models.TimeField(auto_now_add=True)
     member_number = models.ForeignKey(MemberNumber, on_delete=models.CASCADE)
 
-    def __str__(self):
-        info = f'Member Number {self.member_number} | {self.date}'
-        return info
-
     class Meta:
         verbose_name_plural = 'Visits'
+
+    def __str__(self):
+        info = f'{self.member_number} | {self.date}'
+        return info
 
 class EventHosts(models.Model):
     first_name = models.CharField(max_length=20, null=False)
@@ -59,12 +64,26 @@ class EventHosts(models.Model):
     phone_number = models.IntegerField(null=False)
     email = models.EmailField(null=False)
 
+    class Meta:
+        verbose_name_plural = 'Event Hosts'
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'
 
 
 class Events(models.Model):
     date = models.DateField(null=False)
     maximum_people = models.IntegerField(null=False)
-    event_name= models.CharField(max_length=20, null=False)
+    event_name = models.CharField(max_length=20, null=False)
     event_description = models.TextField(null=False)
     event_host = models.ManyToManyField(EventHosts)
     event_members = models.ManyToManyField(MemberNumber)
+
+    class Meta:
+        verbose_name_plural = 'Events'
+
+    def __str__(self):
+        return f'{self.event_name} {self.date}'
+
+
+

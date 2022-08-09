@@ -1,14 +1,16 @@
 {% extends 'gym_app/base.html' %}
 {% block content %}
-
+<title>New Visit</title>
+<h4>New Member Visit</h4>
+<br>
 <form action="" method="POST">
     {% if not manual_input %}
     {% csrf_token %}
     {{ form.as_p }}
-    <p><input type="submit" class="button-55" value="Login" name="login"></p>
+    <p><input type="submit" class="button-55" value="Log Visit" name="login"></p>
      {% if visit_logged %}
     <div>
-        <h2 class="success-message">Member {{member_details.member.first_name}} visit has been logged</h2>
+        <h2 class="success-message">{{member_details.member.first_name}}'s visit has been logged</h2>
     </div>
       {% endif %}
     <br>

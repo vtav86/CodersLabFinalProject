@@ -1,0 +1,35 @@
+{% extends 'gym_app/base.html' %}
+{% block content %}
+<div class="all-text">
+<title>My Events</title>
+<h4>My Events </h4>
+<br>
+{% for registered in registered_events %}
+<li>{{ registered.event_name }}</li>
+{% empty %}
+<p>You have not registered for any events yet</p>
+{% endfor %}
+<hr>
+<p>All events listed below </p>
+    </div>
+<hr>
+<table  class="table table-bordered table-hover">
+    <thead class="thead-format">
+    <tr>
+        <td>Event Date</td>
+        <td>Event Name</td>
+        <td>Event Description</td>
+        <td>View Event</td>
+    </tr>
+    </thead>
+
+    {% for event in events %}
+    <tr class="table-font">
+        <td>{{event.date}}</td>
+        <td>{{event.event_name}}</td>
+        <td>{{event.event_description}}</td>
+        <td><a href="/view-event/{{event.id}}/">View</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

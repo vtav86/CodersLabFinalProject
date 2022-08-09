@@ -1,23 +1,29 @@
 {% extends 'gym_app/base.html' %}
 {% block content %}
-<p><H4>Payment History</H4></p>
-<p>{{member_details.member_number}}</p>
+<title>Member Payments </title>
+<h4>Member Payments </h4>
+<br>
+<p>Member number | {{member_details.member_number}}</p>
 <p>{{ member_details.member.first_name}} {{ member_details.member.last_name}}</p>
-<p>Current membership expiry date | {{member_details.expiry}}</p>
-<table>
+<p>Current membership expiry date | {{member_details.expiry}}
+    {% if payment_made %}<b class="success-message">UPDATED!!</b>{% endif %}
+</p>
+<table  class="table table-bordered table-hover">
+    <thead class="thead-format">
     <tr>
-        <th>Payment Date</th>
-        <th>Payment Type</th>
-        <th>Subscription Period</th>
-        <th>Payment Amount</th>
+        <td>Payment Date</td>
+        <td>Payment Type</td>
+        <td>Subscription Period</td>
+        <td>Payment Amount</td>
 
     </tr>
+    </thead>
     {% for payment in payments %}
-    <tr>
-        <th>{{payment.payment_date}}</th>
-        <th>{{payment.payment_type}}</th>
-        <th>{{payment.subscription_period}}</th>
-        <th>{{payment.payment_amount}}</th>
+    <tr class="table-font">
+        <td>{{payment.payment_date}}</td>
+        <td>{{payment.payment_type}}</td>
+        <td>{{payment.subscription_period}}</td>
+        <td>{{payment.payment_amount}}</td>
     <tr>
         {% empty %}
         <th>No payment history available</th>
@@ -31,7 +37,10 @@
 
 </table>
 
-
+<hr>
+{% if payment_made %}
+<p class="success-message">Payment made and subscription period updated</p>
+{% endif %}
 <form action="" method="POST">
 {% csrf_token %}
     <p>Select payment type <select name="payment_type">
