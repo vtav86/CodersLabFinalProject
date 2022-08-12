@@ -14,12 +14,9 @@
     <br>
     <p class="success-message">New member added after bypass selected</p>
     {% endif %}
+
     <form action="" method="POST" style="padding-bottom: 80px">
-        {% csrf_token %}
-        {{ form.as_p }}
-
-        <input type="submit" value="Register" class="button-55">
-
+        <div>
         {% if existing_members %}
         <br>
         <br>
@@ -39,7 +36,12 @@
             <br>
             <p><input type="submit" name="bypass" value="Register Anyway" class="button-55"></p>
         </b>
-        {% endif %}
+        {% endif %}</div>
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <input type="submit" value="Register" class="button-55">
+
         <br>
 
 

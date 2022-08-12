@@ -23,17 +23,18 @@ def create_member():
         phone_number=123123,
         email="test@test.com",
         emergency_contact_name="Joe",
-        emergency_contact_phone_number=2331233
+        emergency_contact_phone_number=2331233,
     )
-    member_number = MemberNumber.objects.create(member_number=9876, member_id=new_member.id, expiry=datetime.now())
+    member_number = MemberNumber.objects.create(
+        member_number=9876, member_id=new_member.id, expiry=datetime.now()
+    )
     return member_number, new_member
 
 
 @pytest.fixture
 def register_visit():
     member_number_instance = MemberNumber.objects.get(member_number=9876)
-    visit_instance = Visits.objects.create(
-        member_number=member_number_instance)
+    visit_instance = Visits.objects.create(member_number=member_number_instance)
     visit_instance.date = "2022-08-09"
     visit_instance.time = "03:30:00"
     visit_instance.save()
@@ -47,7 +48,8 @@ def manage_payment():
         member=member_instance,
         payment_type="Cash",
         subscription_period=30,
-        payment_amount=1000)
+        payment_amount=1000,
+    )
     payment.payment_date = "2022-08-09"
     payment.save()
     return payment
@@ -60,7 +62,8 @@ def create_event():
         first_name="Sean",
         last_name="Sampson",
         phone_number=5556666,
-        email="sean@sampson.com")
+        email="sean@sampson.com",
+    )
     hosts = EventHosts.objects.filter(pk=1)
     event = Events()
     event.id = 1
@@ -82,7 +85,8 @@ def multiple_events():
         first_name="Sean",
         last_name="Sampson",
         phone_number=5556666,
-        email="sean@sampson.com")
+        email="sean@sampson.com",
+    )
     hosts = EventHosts.objects.filter(pk=1)
     event1 = Events()
     event1.id = 1
@@ -131,9 +135,11 @@ def create_multiple_members():
         phone_number=123123,
         email="test@test.com",
         emergency_contact_name="Joe",
-        emergency_contact_phone_number=2331233
+        emergency_contact_phone_number=2331233,
     )
-    member_number1 = MemberNumber.objects.create(member_number=9874, member_id=new_member1.id, expiry=datetime.now())
+    member_number1 = MemberNumber.objects.create(
+        member_number=9874, member_id=new_member1.id, expiry=datetime.now()
+    )
     new_member2 = Members.objects.create(
         id=2,
         first_name="Tom",
@@ -146,9 +152,11 @@ def create_multiple_members():
         phone_number=123123,
         email="test@test.com",
         emergency_contact_name="Joe",
-        emergency_contact_phone_number=2331233
+        emergency_contact_phone_number=2331233,
     )
-    member_number2 = MemberNumber.objects.create(member_number=9875, member_id=new_member2.id, expiry=datetime.now())
+    member_number2 = MemberNumber.objects.create(
+        member_number=9875, member_id=new_member2.id, expiry=datetime.now()
+    )
 
     new_member3 = Members.objects.create(
         id=3,
@@ -162,11 +170,18 @@ def create_multiple_members():
         phone_number=123123,
         email="test@test.com",
         emergency_contact_name="Joe",
-        emergency_contact_phone_number=2331233
+        emergency_contact_phone_number=2331233,
     )
-    member_number3 = MemberNumber.objects.create(member_number=9876, member_id=new_member3.id, expiry=datetime.now())
+    member_number3 = MemberNumber.objects.create(
+        member_number=9876, member_id=new_member3.id, expiry=datetime.now()
+    )
 
-    return member_number1, member_number2, member_number3,
+    return (
+        member_number1,
+        member_number2,
+        member_number3,
+    )
+
 
 @pytest.fixture
 def change_membership_number():
@@ -174,6 +189,7 @@ def change_membership_number():
     member_number_instance.member_number = 9877
     member_number_instance.save()
     return member_number_instance
+
 
 @pytest.fixture
 def delete_event():

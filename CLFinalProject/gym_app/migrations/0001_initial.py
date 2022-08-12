@@ -8,48 +8,83 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Members',
+            name="Members",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('first_name', models.CharField(max_length=30)),
-                ('last_name', models.CharField(max_length=30)),
-                ('date_of_birth', models.DateField()),
-                ('building_number', models.IntegerField()),
-                ('apartment_number', models.IntegerField()),
-                ('street_name', models.CharField(max_length=50)),
-                ('city', models.CharField(max_length=40)),
-                ('phone_number', models.IntegerField()),
-                ('email', models.EmailField(max_length=254)),
-                ('emergency_contact_name', models.CharField(max_length=60)),
-                ('emergency_contact_phone_number', models.IntegerField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("first_name", models.CharField(max_length=30)),
+                ("last_name", models.CharField(max_length=30)),
+                ("date_of_birth", models.DateField()),
+                ("building_number", models.IntegerField()),
+                ("apartment_number", models.IntegerField()),
+                ("street_name", models.CharField(max_length=50)),
+                ("city", models.CharField(max_length=40)),
+                ("phone_number", models.IntegerField()),
+                ("email", models.EmailField(max_length=254)),
+                ("emergency_contact_name", models.CharField(max_length=60)),
+                ("emergency_contact_phone_number", models.IntegerField()),
             ],
             options={
-                'verbose_name_plural': 'Members',
+                "verbose_name_plural": "Members",
             },
         ),
         migrations.CreateModel(
-            name='Payments',
+            name="Payments",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('payment_type', models.CharField(max_length=20)),
-                ('payment_date', models.DateField(auto_now_add=True)),
-                ('subscription_period', models.CharField(max_length=20)),
-                ('payment_amount', models.IntegerField()),
-                ('member', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='gym_app.members')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("payment_type", models.CharField(max_length=20)),
+                ("payment_date", models.DateField(auto_now_add=True)),
+                ("subscription_period", models.CharField(max_length=20)),
+                ("payment_amount", models.IntegerField()),
+                (
+                    "member",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="gym_app.members",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='MemberNumber',
+            name="MemberNumber",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('member_number', models.IntegerField(unique=True)),
-                ('expiry', models.DateField()),
-                ('member', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='gym_app.members')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("member_number", models.IntegerField(unique=True)),
+                ("expiry", models.DateField()),
+                (
+                    "member",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="gym_app.members",
+                    ),
+                ),
             ],
         ),
     ]

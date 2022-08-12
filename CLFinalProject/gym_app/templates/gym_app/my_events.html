@@ -6,7 +6,7 @@
     <h4>My Events </h4>
     <br>
     {% for registered in registered_events %}
-    <li>{{ registered.event_name }}</li>
+    <ul>{{ registered.event_name }}</ul>
     {% empty %}
     <p>You have not registered for any events yet</p>
     {% endfor %}

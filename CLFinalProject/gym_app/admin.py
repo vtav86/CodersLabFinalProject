@@ -8,4 +8,3 @@ admin.site.register(Payments)
 admin.site.register(Visits)
 admin.site.register(Events)
 admin.site.register(EventHosts)
-

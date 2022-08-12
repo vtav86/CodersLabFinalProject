@@ -12,10 +12,11 @@ def is_staff(request):
     else:
         return False
 
+
 def my_cp(request):
     user_logged_in = request.user
     if user_logged_in.is_anonymous:
-        user = 'friend!'
+        user = "friend!"
     else:
         user = User.objects.get(username=user_logged_in).first_name
     local_yerevan_timezone = pytz.timezone("Asia/Yerevan")
@@ -25,6 +26,6 @@ def my_cp(request):
         "context_version": "1.0",
         "context_weather": get_weather(),
         "context_user": user,
-        "context_admin": is_staff(request)
+        "context_admin": is_staff(request),
     }
     return ctx

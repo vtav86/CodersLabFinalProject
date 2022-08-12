@@ -7,15 +7,18 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('gym_app', '0003_visits'),
+        ("gym_app", "0003_visits"),
     ]
 
     operations = [
-
         migrations.AddField(
-            model_name='visits',
-            name='member',
-            field=models.ForeignKey(default=123123, on_delete=django.db.models.deletion.CASCADE, to='gym_app.membernumber'),
+            model_name="visits",
+            name="member",
+            field=models.ForeignKey(
+                default=123123,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="gym_app.membernumber",
+            ),
             preserve_default=False,
         ),
     ]

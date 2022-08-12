@@ -6,24 +6,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('gym_app', '0006_eventhosts_events'),
+        ("gym_app", "0006_eventhosts_events"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='events',
-            old_name='description',
-            new_name='event_description',
+            model_name="events",
+            old_name="description",
+            new_name="event_description",
         ),
         migrations.RenameField(
-            model_name='events',
-            old_name='members',
-            new_name='event_members',
+            model_name="events",
+            old_name="members",
+            new_name="event_members",
         ),
         migrations.AddField(
-            model_name='events',
-            name='event_name',
-            field=models.CharField(default='Test event', max_length=20),
+            model_name="events",
+            name="event_name",
+            field=models.CharField(default="Test event", max_length=20),
             preserve_default=False,
         ),
     ]

@@ -6,20 +6,28 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('gym_app', '0002_alter_membernumber_expiry'),
+        ("gym_app", "0002_alter_membernumber_expiry"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Visits',
+            name="Visits",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date', models.DateField(auto_now_add=True)),
-                ('time', models.TimeField(auto_now_add=True)),
-                ('member', models.ManyToManyField(to='gym_app.membernumber')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("date", models.DateField(auto_now_add=True)),
+                ("time", models.TimeField(auto_now_add=True)),
+                ("member", models.ManyToManyField(to="gym_app.membernumber")),
             ],
             options={
-                'verbose_name_plural': 'Visits',
+                "verbose_name_plural": "Visits",
             },
         ),
     ]
