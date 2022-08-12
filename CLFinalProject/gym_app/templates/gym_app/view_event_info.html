@@ -1,45 +1,46 @@
 {% extends 'gym_app/base.html' %}
 {% block content %}
 <title>Event Info</title>
-<h4>Event Info</h4>
-<br>
-<h4>{{ event_info.event_name }}</h4>
-<p>Currently registered:</p>
-{% for register in registered %}
-<li>{{ register }}</li>
-{% empty %}
-<p>No registrations yet</p>
-{% endfor %}
-<hr>
-{% if not deleted %}
-<form action="" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" class="button-55" value="Save" name="Save">
+<div class="container" style="margin-left:140px; padding-bottom: 60px">
+    <h4>Event Info</h4>
+    <br>
+    <h4>{{ event_info.event_name }}</h4>
+    <p>Currently registered:</p>
+    {% for register in registered %}
+    <li>{{ register }}</li>
+    {% empty %}
+    <p>No registrations yet</p>
+    {% endfor %}
+    <hr>
+    {% if not deleted %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="button-55" value="Save" name="Save">
         <input type="submit" class="button-55" value="Delete Event" name="Delete">
-    {% if updated %}
+        {% if updated %}
 
-    <div class="success-message">
-         <br>
-        Event details have been updated
-    </div>
+        <div class="success-message">
+            <br>
+            Event details have been updated
+        </div>
+        {% endif %}
+
+        {% if delete_event %}
+        <div class="error-message">
+            <br>
+            ARE YOU SURE YOU WANT TO DELETE THIS EVENT
+            <input type="submit" class="button-55" value="Confirm Delete" name="Confirm Delete">
+        </div>
+        {% endif %}
+    </form>
     {% endif %}
-
-    {% if delete_event %}
+    {% if deleted %}
     <div class="error-message">
-         <br>
-        ARE YOU SURE YOU WANT TO DELETE THIS EVENT
-        <input type="submit" class="button-55" value="Confirm Delete" name="Confirm Delete">
-    </div>
-    {% endif %}
-</form>
-{% endif %}
-{% if deleted %}
-<div class="error-message">
-         <br>
+        <br>
         Event has now been deleted
-    <p><a href="/view-all-events/">View all events page</a></p>
+        <p><a href="/view-all-events/">View all events page</a></p>
     </div>
     {% endif %}
-
+</div>
 {% endblock %}

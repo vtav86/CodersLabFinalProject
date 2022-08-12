@@ -1,6 +1,7 @@
 {% extends 'gym_app/base.html' %}
 {% block content %}
 <title>Edit Member Details</title>
+<div class="container" style="margin-left:140px; padding-bottom: 60px" >
 <h4>Edit Member Details</h4>
 <br>
 <p>Membership Number | {{ user.member_number }} </p>
@@ -20,6 +21,6 @@
     {{ form.as_p }}
     <input type="submit" class="button-55" value="Save Details">
 </form>
-
+</div>
 
 {% endblock %}

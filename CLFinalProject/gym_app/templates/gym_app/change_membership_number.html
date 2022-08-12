@@ -1,40 +1,42 @@
 {% extends 'gym_app/base.html' %}
 {% block content %}
 <title>Change Membership Number </title>
-<h4>Change Membership Number </h4>
-<hr>
-
-<form action="" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" class="button-55" name="select" value="Select">
-    {% if selected %}
-    <br>
+<div class="container" style="margin-left:140px; padding-bottom: 60px">
+    <h4>Change Membership Number </h4>
     <hr>
-    <p>Enter new membership number
-        <input type="number" name="new_number"></p>
-    <input type="submit" class="button-55" name="confirm_number" value="Confirm New Number">
 
-    {% endif %}
-<br>
-    {% if number_in_use %}
-
-    <hr>
-    <div class="error-message">
-        Membership number in use! Select another....
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="button-55" name="select" value="Select">
+        {% if selected %}
+        <br>
+        <hr>
         <p>Enter new membership number
             <input type="number" name="new_number"></p>
         <input type="submit" class="button-55" name="confirm_number" value="Confirm New Number">
-    </div>
-    {% endif %}
 
-  <br>
-{% if confirmed %}
-<br>
-<hr>
-<div class="success-message">
-    Membership number updated successfully!
+        {% endif %}
+        <br>
+        {% if number_in_use %}
+
+        <hr>
+        <div class="error-message">
+            Membership number in use! Select another....
+            <p>Enter new membership number
+                <input type="number" name="new_number"></p>
+            <input type="submit" class="button-55" name="confirm_number" value="Confirm New Number">
+        </div>
+        {% endif %}
+
+        <br>
+        {% if confirmed %}
+        <br>
+        <hr>
+        <div class="success-message">
+            Membership number updated successfully!
+        </div>
+        {% endif %}
+    </form>
 </div>
-{% endif %}
-</form>
 {% endblock %}

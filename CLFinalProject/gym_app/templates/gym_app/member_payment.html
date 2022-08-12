@@ -1,72 +1,73 @@
 {% extends 'gym_app/base.html' %}
 {% block content %}
 <title>Member Payments </title>
-<h4>Member Payments </h4>
-<br>
-<p>Member number | {{member_details.member_number}}</p>
-<p>{{ member_details.member.first_name}} {{ member_details.member.last_name}}</p>
-<p>Current membership expiry date | {{member_details.expiry}}
-    {% if payment_made %}<b class="success-message">UPDATED!!</b>{% endif %}
-</p>
-<table  class="table table-bordered table-hover">
-    <thead class="thead-format">
-    <tr>
-        <td>Payment Date</td>
-        <td>Payment Type</td>
-        <td>Subscription Period</td>
-        <td>Payment Amount</td>
-
-    </tr>
-    </thead>
-    {% for payment in payments %}
-    <tr class="table-font">
-        <td>{{payment.payment_date}}</td>
-        <td>{{payment.payment_type}}</td>
-        <td>{{payment.subscription_period}}</td>
-        <td>{{payment.payment_amount}}</td>
-    <tr>
-        {% empty %}
-        <th>No payment history available</th>
-        <th></th>
-        <th></th>
-        <th></th>
-    </tr>
-
-
-    {% endfor %}
-
-</table>
-
-<hr>
-{% if payment_made %}
-<p class="success-message">Payment made and subscription period updated</p>
-{% endif %}
-<form action="" method="POST">
-{% csrf_token %}
-    <p>Select payment type <select name="payment_type">
-        {% for type in payment_type %}
-
-        <option value="{{ type.0 }}">{{type.1}}</option>
-
-        {% endfor %}</select></p>
-    <p>Select subscription period <select name="subscription">
-        {% for sub in subscription %}
-
-        <option value="{{ sub.0 }}">{{sub.1}}</option>
-
-        {% endfor %}</select></p>
-    <p>Enter amount paid <input required type="number" name="payment_amount" min="0"></p>
-    <input type="submit" class="button-55" name="payment_confirmation" value="Confirm Payment">
-
-
-    {% if new_expiry_date %}
-    <hr>
+<div class="container" style="margin-left:140px; padding-bottom: 60px">
+    <h4>Member Payments </h4>
     <br>
-    <p>Payment for {{member}} {{member.last_name}} has been confirmed!</p>
-    <p>New expiry date is {{ new_expiry_date.expiry }}</p>
+    <p>Member number | {{member_details.member_number}}</p>
+    <p>{{ member_details.member.first_name}} {{ member_details.member.last_name}}</p>
+    <p>Current membership expiry date | {{member_details.expiry}}
+        {% if payment_made %}<b class="success-message">UPDATED!!</b>{% endif %}
+    </p>
+    <table class="table table-bordered table-hover">
+        <thead class="thead-format">
+        <tr>
+            <td>Payment Date</td>
+            <td>Payment Type</td>
+            <td>Subscription Period</td>
+            <td>Payment Amount</td>
+
+        </tr>
+        </thead>
+        {% for payment in payments %}
+        <tr class="table-font">
+            <td>{{payment.payment_date}}</td>
+            <td>{{payment.payment_type}}</td>
+            <td>{{payment.subscription_period}}</td>
+            <td>{{payment.payment_amount}}</td>
+        <tr>
+            {% empty %}
+            <th>No payment history available</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+
+
+        {% endfor %}
+
+    </table>
+
+    <hr>
+    {% if payment_made %}
+    <p class="success-message">Payment made and subscription period updated</p>
     {% endif %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <p>Select payment type <select name="payment_type">
+            {% for type in payment_type %}
 
-</form>
+            <option value="{{ type.0 }}">{{type.1}}</option>
 
+            {% endfor %}</select></p>
+        <p>Select subscription period <select name="subscription">
+            {% for sub in subscription %}
+
+            <option value="{{ sub.0 }}">{{sub.1}}</option>
+
+            {% endfor %}</select></p>
+        <p>Enter amount paid <input required type="number" name="payment_amount" min="0"></p>
+        <input type="submit" class="button-55" name="payment_confirmation" value="Confirm Payment">
+
+
+        {% if new_expiry_date %}
+        <hr>
+        <br>
+        <p>Payment for {{member}} {{member.last_name}} has been confirmed!</p>
+        <p>New expiry date is {{ new_expiry_date.expiry }}</p>
+        {% endif %}
+
+    </form>
+</div>
 {% endblock %}
 

@@ -1,24 +1,26 @@
 {% extends 'gym_app/base.html' %}
 {% block content %}
 <title>Login</title>
-<h4>Login</h4>
-<br>
-{% if not already_logged_in %}
-<form action="" method="POST" class="form-group">
+<div class="container" style="margin-left:140px; padding-bottom: 60px">
+    <h4>Login</h4>
+    <br>
+    {% if not already_logged_in %}
+    <form action="" method="POST" class="form-group">
 
-    {% csrf_token %}
+        {% csrf_token %}
 
-    {{ form.as_p }}
-    <input type="submit" class="button-55" value="Login">
+        {{ form.as_p }}
+        <input type="submit" class="button-55" value="Login">
 
-</form>
-{% endif %}
-{% if form_error %}
-<b>
+    </form>
+    {% endif %}
+    {% if form_error %}
+
     <b style="color:red">{{ form_error }}
     </b>
     {% endif %}
     {% if already_logged_in %}
     <p>You are logged in as {{context_user}}</p>
-{% endif %}
-    {% endblock %}
+    {% endif %}
+</div>
+{% endblock %}

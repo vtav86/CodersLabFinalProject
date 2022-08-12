@@ -1,43 +1,44 @@
 {% extends 'gym_app/base.html' %}
 {% block content %}
 <title>Online Registration</title>
-<h4>Online Registration</h4>
-<br>
-
-{% if not already_logged_in %}
-
-<form action="" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" class="button-55" value="Register">
-
-
-</form>
-{% endif %}
-<br>
-<br>
-{% if already_registered %}
-<br>
-<p>{{ already_registered}}</p>
-<p><a href="/login">Proceed to login page</a></p>
-{% endif %}
-
-{% if mismatch %}
-<br>
-<p>Member number and last name did not match</p>
-
-{% endif %}
-{% if registered %}
-<br>
-<p>You are now registered for online access. </p>
-<p><a href="/login">Proceed to login page</a></p>
-
-{% endif %}
-
-
-<br>
-{% if already_logged_in %}
-<p>You have already registered for online access and are now logged in!</p>
-<p><a href="/logout/">Logout </a>in order to register someone else for online access</p>
-{% endif %}
+<div class="container" style="margin-left:140px; padding-bottom: 60px">
+    <h4>Online Registration</h4>
+    <br>
+    <br>
+    {% if not already_logged_in %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br>
+        <div style="font-size: smaller; line-height: 0.5">
+            <p>* minimum 8 characters</p>
+            <p>* must contain a capital letter</p>
+            <p>* must contain a special character</p>
+        </div>
+        <br>
+        <input type="submit" class="button-55" value="Register">
+    </form>
+    {% endif %}
+    <br>
+    <br>
+    {% if already_registered %}
+    <br>
+    <p>{{ already_registered}}</p>
+    <p><a href="/login">Proceed to login page</a></p>
+    {% endif %}
+    {% if mismatch %}
+    <br>
+    <p>Member number and last name did not match</p>
+    {% endif %}
+    {% if registered %}
+    <br>
+    <p>You are now registered for online access. </p>
+    <p><a href="/login">Proceed to login page</a></p>
+    {% endif %}
+    <br>
+    {% if already_logged_in %}
+    <p>You have already registered for online access and are now logged in!</p>
+    <p><a href="/logout/">Logout </a>in order to register someone else for online access</p>
+    {% endif %}
+</div>
 {% endblock %}

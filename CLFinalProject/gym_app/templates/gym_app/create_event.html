@@ -1,17 +1,18 @@
 {% extends 'gym_app/base.html' %}
 {% block content %}
 <title>Create New Event </title>
-<h4>Create New Event </h4>
-<br>
-<form action="" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" class="button-55" value="Create Event">
-</form>
-<br>
+<div class="container" style="margin-left:140px; padding-bottom: 60px">
+    <h4>Create New Event </h4>
+    <br>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="button-55" value="Create Event">
+    </form>
+    <br>
 
-{% if new_event %}
-<p class="success-message">{{ new_event.event_name }} has been created.</p>
-{% endif %}
-
+    {% if new_event %}
+    <p class="success-message">{{ new_event.event_name }} has been created.</p>
+    {% endif %}
+</div>
 {% endblock %}

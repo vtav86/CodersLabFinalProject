@@ -30,6 +30,30 @@ class HomePageView(View):
             return render(request, "gym_app/home.html")
 
 
+class AboutUsView(View):
+    def get(self, request):
+        if request.user.is_staff:
+            return render(request, "gym_app/about_us.html", {'admin': 'admin'})
+        else:
+            return render(request, "gym_app/about_us.html")
+
+
+class PricingView(View):
+    def get(self, request):
+        if request.user.is_staff:
+            return render(request, "gym_app/pricing.html", {'admin': 'admin'})
+        else:
+            return render(request, "gym_app/pricing.html")
+
+
+class ContactUsView(View):
+    def get(self, request):
+        if request.user.is_staff:
+            return render(request, "gym_app/contact_us.html", {'admin': 'admin'})
+        else:
+            return render(request, "gym_app/contact_us.html")
+
+
 class LoginView(View):
 
     def get(self, request):
@@ -88,7 +112,7 @@ class RegisterNewMemberView(UserPassesTestMixin, View):
 
     def get(self, request):
         form = RegisterNewMemberForm()
-        return render(request, 'gym_app/register_new_member.html', {'form': form, 'admin': 'admin'})
+        return render(request, 'gym_app/register_new_member.html', {'form': form, 'admin': 'admin', 'test': 'test'})
 
     def post(self, request):
         form = RegisterNewMemberForm(request.POST)
@@ -122,11 +146,13 @@ class RegisterNewMemberView(UserPassesTestMixin, View):
                     existing_members = Members.objects.filter(first_name=first_name, last_name=last_name,
                                                               date_of_birth=date_of_birth)
                     return render(request, 'gym_app/register_new_member.html',
-                                  {'form': form, 'existing_members': existing_members, 'admin': 'admin'})
+                                  {'form': form, 'existing_members': existing_members, 'admin': 'admin',
+                                   'first_name': first_name})
                 new_member = Members.objects.create(**credentials)
                 MemberNumber.objects.create(member_number=member_number, member_id=new_member.id, expiry=datetime.now())
                 return render(request, 'gym_app/register_new_member.html',
-                              {'form': form, 'member_added': 'member_added', 'admin': 'admin'})
+                              {'form': form, 'member_added': 'member_added', 'admin': 'admin',
+                               'member_number': member_number})
             elif request.POST.get('bypass') is not None:
                 new_member = Members.objects.create(**credentials)
                 MemberNumber.objects.create(member_number=member_number, member_id=new_member.id, expiry=datetime.now())
@@ -550,9 +576,12 @@ class RegisterMemberVisitView(UserPassesTestMixin, View):
                     if membership_number.expiry > datetime.now().date():
                         Visits.objects.create(date=datetime.now().date(), time=datetime.now().time(),
                                               member_number_id=membership_number.id)
+                        membership_number = MemberNumber.objects.get(member_number=entered_member_number)
                         return render(request, "gym_app/register_member_visit.html",
-                                      {'form': form, 'admin': 'admin', 'visit_logged': 'visit_logged'})
+                                      {'form': form, 'admin': 'admin', 'member_details': membership_number,
+                                       'visit_logged': 'visit_logged'})
                     else:
+                        membership_number = MemberNumber.objects.get(member_number=entered_member_number)
                         return render(request, "gym_app/register_member_visit.html",
                                       {'form': form, 'membership_expired': 'membership_expired',
                                        'member_details': membership_number, 'admin': 'admin'})
@@ -629,7 +658,7 @@ class ViewAllEventsView(UserPassesTestMixin, View):
         return redirect("accessdenied")
 
     def get(self, request):
-        events = Events.objects.all()
+        events = Events.objects.all().order_by('date')
         return render(request, "gym_app/view_all_events.html",
                       {'events': events, 'registered': list_of_events_and_attendees().items(), 'admin': 'admin'})
 
@@ -686,17 +715,24 @@ class MyEventsView(View):
         auth = user.is_authenticated
         # if not logged in
         if auth is False:
-            return redirect("login")
-        else:
-            member = MemberNumber.objects.get(member_number=user.username)
             events = Events.objects.all()
-            registered_events = Events.objects.filter(event_members=member.id)
-            if request.user.is_staff:
-                return render(request, "gym_app/my_events.html",
-                              {'events': events, 'registered_events': registered_events, 'admin': 'admin'})
+            return render(request, "gym_app/my_events.html",
+                          {'all_events': events})
+        else:
+            if user.username.isnumeric():
+                member = MemberNumber.objects.get(member_number=user.username)
+                events = Events.objects.all()
+                registered_events = Events.objects.filter(event_members=member.id)
+                if request.user.is_staff:
+                    return render(request, "gym_app/my_events.html",
+                                  {'events': events, 'registered_events': registered_events, 'admin': 'admin'})
+                else:
+                    return render(request, "gym_app/my_events.html",
+                                  {'events': events, 'registered_events': registered_events})
             else:
+                events = Events.objects.all()
                 return render(request, "gym_app/my_events.html",
-                              {'events': events, 'registered_events': registered_events})
+                              {'all_events': events})
 
 
 class RegisterForEventView(View):

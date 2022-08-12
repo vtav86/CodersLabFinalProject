@@ -2,10 +2,10 @@
 {% block content %}
 {{ form.non_field_errors }}
 <title>New Membership </title>
-<h4>New Membership </h4>
-<br>
-<div class="form-group">
-     <br>
+<div class="container" style="margin-left:140px; padding-bottom: 60px">
+    <h4>New Membership </h4>
+    <br>
+    <br>
     {% if member_added %}
     <br>
     <p class="success-message">New member added</p>
@@ -14,36 +14,37 @@
     <br>
     <p class="success-message">New member added after bypass selected</p>
     {% endif %}
-<form action="" method="POST" style="padding-bottom: 80px">
-    {% csrf_token %}
-    {{ form.as_p }}
+    <form action="" method="POST" style="padding-bottom: 80px">
+        {% csrf_token %}
+        {{ form.as_p }}
 
-    <input type="submit" value="Register" class="button-55">
+        <input type="submit" value="Register" class="button-55">
 
-    {% if existing_members %}
-    <br>
-    <br>
-    <b style="color:red"><h4>WARNING!</h4>
-        Existing member(s) with same name and date of birth found!
-        {% for each_existing_member in existing_members %}
-        <ul>
-            See member profile for <a href="/edit-member-profile/{{each_existing_member.id}}/">
-            {{each_existing_member.first_name}}
-            {{each_existing_member.last_name}}</a>
-            Phone Number - {{ each_existing_member.phone_number }}
-            Street - {{ each_existing_member.street_name }}
-        </ul>
-        {% endfor %}
-        If you would still like to register these details click register anyway.
+        {% if existing_members %}
         <br>
         <br>
-        <p><input type="submit" name="bypass" value="Register Anyway" class="button-55"></p>
-    </b>
-    {% endif %}
-    <br>
+        <b class="error-message"><h4>WARNING!</h4>
+            Existing member(s) with same name and date of birth found!
+            {% for each_existing_member in existing_members %}
+            <ul>
+                See member profile for <a href="/edit-member-profile/{{each_existing_member.id}}/">
+                {{each_existing_member.first_name}}
+                {{each_existing_member.last_name}}</a>
+                Phone Number - {{ each_existing_member.phone_number }}
+                Street - {{ each_existing_member.street_name }}
+            </ul>
+            {% endfor %}
+            If you would still like to register these details click register anyway.
+            <br>
+            <br>
+            <p><input type="submit" name="bypass" value="Register Anyway" class="button-55"></p>
+        </b>
+        {% endif %}
+        <br>
 
 
-</form></div>
+    </form>
 
+</div>
 {% endblock %}
 

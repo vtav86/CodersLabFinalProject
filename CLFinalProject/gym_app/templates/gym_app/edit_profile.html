@@ -1,23 +1,23 @@
 {% extends 'gym_app/base.html' %}
 {% block content %}
 <title>My Profile </title>
-<h4>My profile </h4>
-<br>
-<p>Edit your personal details here {{ first_name }}. </p>
-<p>Membership Number | {{ member_number }} </p>
-<hr>
-<form action="" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" class="button-55" value="Save Details">
-</form>
-{% if successful %}
-<br>
-<hr>
-<div class="success-message">
-    Details updated successfully!
+<div class="container" style="margin-left:140px; padding-bottom: 60px">
+    <h4>My profile </h4>
+    <br>
+    <p>Edit your personal details here {{ first_name }}. </p>
+    <p>Membership Number | {{ member_number }} </p>
+    <hr>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="button-55" value="Save Details">
+    </form>
+    {% if successful %}
+    <br>
+    <hr>
+    <div class="success-message">
+        Details updated successfully!
+    </div>
+    {% endif %}
 </div>
-{% endif %}
-
-
-    {% endblock %}
+{% endblock %}

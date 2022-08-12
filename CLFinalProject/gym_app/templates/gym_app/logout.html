@@ -1,19 +1,20 @@
 {% extends 'gym_app/base.html' %}
 {% block content %}
 <title>Logout </title>
-<h4>Logout</h4>
-<br>
-{% if auth %}
-<p>User {{user.first_name}} currently logged in</p>
-<form action="" method="POST">
-    {% csrf_token %}
-    <button type="submit" class="button-55">Logout</button>
-</form>
-{% else %}
-<p>No users logged in</p>
-<p><a href="/login/">Proceed to login</a></p>
+<div class="container" style="margin-left:140px; padding-bottom: 60px">
+    <h4>Logout</h4>
+    <br>
+    {% if auth %}
+    <p>User {{user.first_name}} currently logged in</p>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="button-55">Logout</button>
+    </form>
+    {% else %}
+    <p>No users logged in</p>
+    <p><a href="/login/">Proceed to login</a></p>
 
-{% endif %}
-
+    {% endif %}
+</div>
 {% endblock %}
 

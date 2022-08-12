@@ -1,67 +1,69 @@
 {% extends 'gym_app/base.html' %}
 {% block content %}
 <title>My Profile </title>
-<h4>My Profile </h4>
-<br>
-{% if not already_logged_in %}
-<form action="" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" class="button-55" value="Login">
-    {% else %}
-    <table class="table table-bordered table-hover">
-        <tr class="table-font">
-            <td>Member Number </td>
-            <td>{{ member_number }}</td>
-        </tr>
-        <tr>
-        <tr>
-            <td>First Name</td>
-            <td> {{ member_details.first_name }}</td>
-        </tr>
-        <tr>
-            <td>Last Name</td>
-            <td> {{ member_details.last_name }}</td>
-        </tr>
-        <tr>
-            <td>Email</td>
-            <td> {{ member_details.email }}</td>
-        </tr>
-        <tr>
-            <td>Phone Number</td>
-            <td> {{ member_details.phone_number }}</td>
-        </tr>
-        <tr>
-            <td>Building Number</td>
-            <td> {{ member_details.building_number }}</td>
-        </tr>
-        <tr>
-            <td>Apartment Number</td>
-            <td> {{ member_details.apartment_number }}</td>
-        </tr>
-        <tr>
-            <td>Street</td>
-            <td> {{ member_details.street }}</td>
-        </tr>
-        <tr>
-            <td>City</td>
-            <td> {{ member_details.city }}</td>
-        </tr>
-        <tr>
-            <td>Contact Name</td>
-            <td> {{ member_details.emergency_contact_name }}</td>
-        </tr>
-        <tr>
-            <td>Contact Number</td>
-            {{ member_details.emergency_contact_number }} </td>
-            <td>
-        </tr>
+<div class="container" style="margin-left:140px; padding-bottom: 60px">
+    <h4>My Profile </h4>
+    <br>
+    {% if not already_logged_in %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="button-55" value="Login">
+        {% else %}
+        <table class="table table-bordered table-hover">
+            <tr class="table-font">
+                <td>Member Number</td>
+                <td>{{ member_number }}</td>
+            </tr>
+            <tr>
+            <tr>
+                <td>First Name</td>
+                <td> {{ member_details.first_name }}</td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td> {{ member_details.last_name }}</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td> {{ member_details.email }}</td>
+            </tr>
+            <tr>
+                <td>Phone Number</td>
+                <td> {{ member_details.phone_number }}</td>
+            </tr>
+            <tr>
+                <td>Building Number</td>
+                <td> {{ member_details.building_number }}</td>
+            </tr>
+            <tr>
+                <td>Apartment Number</td>
+                <td> {{ member_details.apartment_number }}</td>
+            </tr>
+            <tr>
+                <td>Street</td>
+                <td> {{ member_details.street }}</td>
+            </tr>
+            <tr>
+                <td>City</td>
+                <td> {{ member_details.city }}</td>
+            </tr>
+            <tr>
+                <td>Contact Name</td>
+                <td> {{ member_details.emergency_contact_name }}</td>
+            </tr>
+            <tr>
+                <td>Contact Number</td>
+                {{ member_details.emergency_contact_number }} </td>
+                <td>
+            </tr>
 
-    </table>
+        </table>
 
-    {% endif %}
-    <p><a href="/edit-my-profile/">Edit your profile</a></p>
-    <p><a href="/change-password/">Change your password</a></p>
-</form>
+        {% endif %}
+        <p><a href="/edit-my-profile/">Edit your profile</a></p>
+        <p><a href="/change-password/">Change your password</a></p>
+    </form>
+</div>
 
 {% endblock %}

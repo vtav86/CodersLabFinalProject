@@ -1,61 +1,63 @@
 {% extends 'gym_app/base.html' %}
 {% block content %}
 <title>Manage Payments </title>
-<h4>Manage Payments </h4>
-<br>
-<form action="" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    {% if not confirmation %}
-    <input type="submit" class="button-55" name="next" value="Proceed to confirmation">
-    {% endif %}
-
-    {% if confirmation %}
-
-    {% for payment in payment_history %}
-    <li>Last Paid: {{ payment.payment_date }}</li>
-    {% endfor %}
+<div class="container" style="margin-left:140px; padding-bottom: 60px">
+    <h4>Manage Payments </h4>
     <br>
-    Current Expiry Date:
-    {% for date in expiry %}
-    <p>{{ date.expiry }}</p>
-    {% empty %}
-    <p>No expiration date found</p>
-    {% endfor %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if not confirmation %}
+        <input type="submit" class="button-55" name="next" value="Proceed to confirmation">
+        {% endif %}
 
-    <p>Select payment type   <select name="payment_type">
+        {% if confirmation %}
+
+        {% for payment in payment_history %}
+        <li>Last Paid: {{ payment.payment_date }}</li>
+        {% endfor %}
+        <br>
+        Current Expiry Date:
+        {% for date in expiry %}
+        <p>{{ date.expiry }}</p>
+        {% empty %}
+        <p>No expiration date found</p>
+        {% endfor %}
+
+        <p>Select payment type <select name="payment_type">
             {% for type in payment_type %}
 
             <option value="{{ type.0 }}">{{type.1}}</option>
 
             {% endfor %}</select></p>
-    <p>Select subscription period   <select name="subscription">
+        <p>Select subscription period <select name="subscription">
             {% for sub in subscription %}
 
             <option value="{{ sub.0 }}">{{sub.1}}</option>
 
             {% endfor %}</select></p>
-    <p>Enter amount paid   <input required type="number" name="payment_amount" min="0"></p>
-    <input type="submit" class="button-55" name="payment_confirmation" value="Confirm Payment">
-    {% endif %}
+        <p>Enter amount paid <input required type="number" name="payment_amount" min="0"></p>
+        <input type="submit" class="button-55" name="payment_confirmation" value="Confirm Payment">
+        {% endif %}
 
-    {% if errors %}
-    <div class="error-message">
-        <p>Attention! The following members are not assigned a membership number.
-        <p>As such they will not appear in the member list above for payment until they are assigned a member number</p>
-    </div>
-    {% for error in errors %}
-    <ol><a href="/member_profile/{{error.0}}/">{{ error.1 }} </a></ol>
-    {% endfor %}
-    {% endif %}
-{% if new_expiry_date %}
-    <hr>
-    <br>
-    <p>Payment for {{member}} {{member.last_name}} has been confirmed!</p>
-    <p>New expiry date is {{ new_expiry_date.expiry }}</p>
-{% endif %}
-
-
+        {% if errors %}
+        <div class="error-message">
+            <p>Attention! The following members are not assigned a membership number.
+            <p>As such they will not appear in the member list above for payment until they are assigned a member
+                number</p>
+        </div>
+        {% for error in errors %}
+        <ol><a href="/member_profile/{{error.0}}/">{{ error.1 }} </a></ol>
+        {% endfor %}
+        {% endif %}
+        {% if new_expiry_date %}
+        <hr>
+        <br>
+        <p>Payment for {{member}} {{member.last_name}} has been confirmed!</p>
+        <p>New expiry date is {{ new_expiry_date.expiry }}</p>
+        {% endif %}
+    </form>
+</div>
 {% endblock %}
-</form>
+
 

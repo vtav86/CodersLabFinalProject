@@ -118,7 +118,7 @@ class OnlineRegistrationForm(forms.Form):
     member_number = forms.IntegerField(max_value=9999999, required=True, validators=[validate_valid_member_number])
     last_name = forms.CharField(max_length=30, required=True)
     password1 = forms.CharField(min_length=8, required=True, validators=[validate_check_password],
-                                widget=forms.PasswordInput, label="Enter Password")
+                                widget=forms.PasswordInput, label="Enter Password*")
     password2 = forms.CharField(min_length=8, required=True, validators=[validate_check_password],
                                 widget=forms.PasswordInput, label="Confirm Password")
 
@@ -152,7 +152,7 @@ class ManagePaymentForm(forms.Form):
 
 class ChangePasswordForm(forms.Form):
     current_password = forms.CharField(label="Current Password", max_length=20, widget=forms.PasswordInput)
-    password1 = forms.CharField(label="Enter New Password", max_length=20, widget=forms.PasswordInput,
+    password1 = forms.CharField(label="Enter New Password*", max_length=20, widget=forms.PasswordInput,
                                 validators=[validate_check_password])
     password2 = forms.CharField(label="Confirm New Password", max_length=20, widget=forms.PasswordInput,
                                 validators=[validate_check_password])

@@ -1,44 +1,40 @@
 {% extends 'gym_app/base.html' %}
 {% block content %}
 <title>View Members </title>
-<div style="text-align:left">
-<h4>View All Members</h4>
-<br>
-<p>All members listed below </p>
-</div>
-<hr>
-
-
-<table class="table table-bordered table-hover">
-    <thead class="thead-format">
-    <tr>
-        <td>Member Number</td>
-        <td>First Name</td>
-        <td>Last Name</td>
-        <td>Phone Number</td>
-        <td>Email</td>
-        <td>Membership Expiry</td>
-        <td>Edit Profile</td>
-        <td>Make Payment</td>
-    </tr>
-    </thead>
-    {% for member in all_member_numbers %}
-    <tr class="table-font">
-          <td>{{member.member_number}}</td>
-        <td>{{member.member.first_name}}</td>
-        <td>{{member.member.last_name}}</td>
-        <td>{{member.member.phone_number}}</td>
-        <td>{{member.member.email}}</td>
-        {% if member.expiry > date %}
-        <td style="color:green"> {{member.expiry|date:" d M Y" }}</td>
-        {% else %}
-        <td style="color:red"> {{member.expiry|date:" d M Y" }}</td>
-        {% endif %}
-        <td><a href="/edit-member-profile/{{member.member_id}}">Edit</a></td>
+<div class="container" style="margin-left:140px; padding-bottom: 60px">
+    <h4>View All Members</h4>
+    <br>
+    <p>All members listed below </p>
+    <hr>
+    <table class="table table-bordered table-hover">
+        <thead class="thead-format">
+        <tr>
+            <td>Member Number</td>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Phone Number</td>
+            <td>Email</td>
+            <td>Membership Expiry</td>
+            <td>Edit Profile</td>
+            <td>Make Payment</td>
+        </tr>
+        </thead>
+        {% for member in all_member_numbers %}
+        <tr class="table-font">
+            <td>{{member.member_number}}</td>
+            <td>{{member.member.first_name}}</td>
+            <td>{{member.member.last_name}}</td>
+            <td>{{member.member.phone_number}}</td>
+            <td>{{member.member.email}}</td>
+            {% if member.expiry > date %}
+            <td style="color:green"> {{member.expiry|date:" d M Y" }}</td>
+            {% else %}
+            <td style="color:red"> {{member.expiry|date:" d M Y" }}</td>
+            {% endif %}
+            <td><a href="/edit-member-profile/{{member.member_id}}">Edit</a></td>
             <td><a href="/member-payment/{{member.member_id}}">Payment</a></td>
-    </tr>
-    {% endfor %}
-</table>
-
-
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 {% endblock %}

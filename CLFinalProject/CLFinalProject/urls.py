@@ -19,12 +19,14 @@ from django.urls import path
 from gym_app.views import LoginView, HomePageView, RegisterNewMemberView, OnlineRegistrationView, ManagePaymentView, \
     MyProfileView, ChangePasswordView, EditMyProfileView, LogoutView, ViewMembersView, MemberPaymentView, \
     EditMemberProfileView, ChangeMembershipNumberView, RegisterMemberVisitView, CreateEventView, ViewAllEventsView, \
-    ViewEventInfoView, MyEventsView, RegisterForEventView, AccessDeniedView
+    ViewEventInfoView, MyEventsView, RegisterForEventView, AccessDeniedView, AboutUsView, PricingView, ContactUsView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomePageView.as_view(), name="home"),
-    # path('base/',BaseView.as_view(), name="baseview"),
+    path('about/', AboutUsView.as_view(), name="aboutus"),
+    path('pricing/', PricingView.as_view(), name="pricing"),
+    path('contact/', ContactUsView.as_view(), name="contactus"),
     path('login/', LoginView.as_view(), name="login"),
     path('logout/', LogoutView.as_view(), name="logout"),
     path('register-member/', RegisterNewMemberView.as_view(), name="registermember"),
@@ -44,5 +46,6 @@ urlpatterns = [
     path('my-events/', MyEventsView.as_view(), name="myevents"),  # checkaddlink
     path('view-event/<int:event_id>/', RegisterForEventView.as_view(), name="viewevent"),  # addlink
     path('access-denied', AccessDeniedView.as_view(), name="accessdenied"),
+
 
 ]
